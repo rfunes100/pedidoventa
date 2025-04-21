@@ -1,4 +1,4 @@
-# Ignorar archivos y carpetas generados automáticamente
+# Ignorar archivos y carpetas generados automï¿½ticamente
 .vs/
 bin/
 obj/
@@ -13,9 +13,6 @@ obj/
 *.db
 
 
-# Archivos de configuración local
-appsettings.json
-appsettings.Development.json
 
 # Archivos de sistema
 .DS_Store

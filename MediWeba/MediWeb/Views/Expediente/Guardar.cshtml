@@ -1,0 +1,42 @@
+﻿
+
+@model ExpedienteModel
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Expediente
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Guardar" asp-controller="Expediente" method="post">
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Enfermedad</label>
+                <select asp-for="EnfermedadesID" class="form-control" asp-items="ViewBag.Enfermedades">
+                    <option>--Seleccione Enfermedad</option>
+                </select>
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="Listar" asp-controller="Paciente" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+
+
+

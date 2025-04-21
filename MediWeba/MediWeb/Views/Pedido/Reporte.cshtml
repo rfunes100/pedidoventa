@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PedidoInfo>
+
+<h1>Reporte de pedidos de ventas</h1>
+
+<form asp-action="Reporte" method="post">
+    <div class="form-group">
+        <label for="FechaInicio">Fecha de Inicio</label>
+        <input type="date" id="FechaInicio" name="FechaInicio" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="FechaFin">Fecha de Fin</label>
+        <input type="date" id="FechaFin" name="FechaFin" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="ClienteId">Cliente</label>
+        <select id="ClienteId" name="ClienteId" class="form-control">
+            <option value="">Todos los clientes</option>
+            @if (ViewBag.clientes != null)
+            {
+                @foreach (var cliente in ViewBag.clientes as IEnumerable<SelectListItem>)
+                {
+                    <option value="@cliente.Value">@cliente.Text</option>
+                }
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-file-earmark-text"></i>  Generar Reporte
+    </button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h2>Resultados</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var compra in Model)
+            {
+                <tr>
+                    <td>@compra.NombrePaciente</td>
+                    <td>@compra.productid - @compra.NombreMedicamento</td>
+                    <td>@compra.Cantidad</td>
+                    <td>@compra.Precio</td>
+                    <td>@compra.Total</td>
+                    <td>@(compra.FechaCreacion.HasValue ? compra.FechaCreacion.Value.ToString("yyyy-MM-dd") : "N/A")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"><strong>Total Cantidad Vendida:</strong></td>
+                <td>@Model.Sum(c => c.Cantidad)</td>
+                <td colspan="1"><strong>Total Ventas:</strong></td>
+                <td>@Model.Sum(c => c.Total)</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form asp-action="ExportarExcel" method="post">
+        <input type="hidden" name="FechaInicio" value="@ViewBag.FechaInicio" />
+        <input type="hidden" name="FechaFin" value="@ViewBag.FechaFin" />
+        <input type="hidden" name="ClienteId" value="@ViewBag.ClienteId" />
+        <button type="submit" class="btn btn-success">Exportar a Excel</button>
+    </form>
+}

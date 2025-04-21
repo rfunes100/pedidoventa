@@ -1,0 +1,49 @@
+﻿@model CategoriaModel
+
+
+
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Editar Categoria
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Editar" asp-controller="Categoria" method="post">
+
+            <input asp-for="Id" type="hidden" class="form-control" id="exampleInputEmail1">
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+                <input asp-for="Descripcion" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Estado</label>
+                <input asp-for="estado" type="tel" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="estado" class="text-danger"></span>
+
+            </div>
+         
+
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Editar
+            </button>
+            <a asp-action="Listar" asp-controller="Categoria" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>

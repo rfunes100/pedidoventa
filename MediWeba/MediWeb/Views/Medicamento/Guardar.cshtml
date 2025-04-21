@@ -1,0 +1,82 @@
+﻿@model MedicamentoModel
+
+
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Medicamento
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Upload" asp-controller="Medicamento" method="post" enctype="multipart/form-data">
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                <input asp-for="nombre" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="nombre" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+                <textarea asp-for="Descripcion" id="Direccion" class="form-control" rows="3" cols="30"> </textarea>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Precio</label>
+                <input asp-for="Precio" type="number" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Precio" class="text-danger"></span>
+
+            </div>
+
+         @*     <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Cantidad</label>
+                <input asp-for="Cantidad" type="number" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+
+            </div> *@
+
+
+            <div class="mb-3">
+                <label for="file" class="form-label">Subir foto</label>
+                <input class="form-control" type="file" name="file" >
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Subir
+            </button>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Categoria</label>
+                <select asp-for="CategoriaID" class="form-control" asp-items="ViewBag.Categorias">
+                    <option>--Seleccione Categoria</option>
+                </select>
+
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="Lista" asp-controller="Usuario" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+
+@* <img src="@TempData["imgUrl"]" class="img-thumbnail"  />
+<label>@TempData["imgUrl"]</label> *@

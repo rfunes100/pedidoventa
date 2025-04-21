@@ -1,0 +1,45 @@
+﻿@model List<MedicamentoModel>
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card-header">
+        Lista de artículos
+
+        <a asp-action="Guardar" asp-controller="Medicamento" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i>
+            Crear nuevo
+        </a>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <p class="card-text">@item.nombre - $@item.Precio</p>
+
+                        <!-- Imagen con tamaño uniforme -->
+                        <img src="@item.imagen" class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;" />
+
+                        <!-- Botones debajo de la imagen -->
+                        <div class="d-flex justify-content-center gap-2">
+                            <a asp-action="Lista" asp-controller="Medicamento" class="btn btn-primary" asp-route-id="@item.Id">
+                                <i class="bi bi-eye"></i> Agregar
+                            </a>
+                            <a asp-action="EditarPrecio" asp-controller="Medicamento" class="btn btn-success" asp-route-id="@item.Id">
+                                <i class="bi bi-currency-dollar"></i> Editar Precio
+                            </a>
+                            <a asp-action="Eliminar" asp-controller="Enfermera" class="btn btn-danger" asp-route-idEnfermera="@item.Id">
+                                <i class="bi bi-x-circle-fill"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

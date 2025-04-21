@@ -1,0 +1,35 @@
+﻿@model List<StockProductoModel>
+
+@{
+    ViewData["Title"] = "Stock de Productos";
+}
+
+<h1>Stock de Productos</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Medicamento ID</th>
+            <th>Nombre Medicamento</th>
+            <th>Total Comprado</th>
+            <th>Total Vendido</th>
+            <th>Stock Actual</th>
+            <th>Diferencia</th>
+            <th>Diferencia Real</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stock in Model)
+        {
+            <tr class="@(stock.DiferenciaReal < 0 ? "table-danger" : "")">
+                <td>@stock.MedicamentoID</td>
+                <td>@stock.NombreMedicamento</td>
+                <td>@stock.TotalComprado</td>
+                <td>@stock.TotalVendido</td>
+                <td>@stock.StockActual</td>
+                <td>@stock.Diferencia</td>
+                <td>@stock.DiferenciaReal</td>
+            </tr>
+        }
+    </tbody>
+</table>

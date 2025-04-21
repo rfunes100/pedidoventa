@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CompraModel>
+
+<h1>Reporte de Compras</h1>
+
+<form asp-action="GenerarReporte" method="post">
+    <div class="form-group">
+        <label for="FechaInicio">Fecha de Inicio</label>
+        <input type="date" id="FechaInicio" name="FechaInicio" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="FechaFin">Fecha de Fin</label>
+        <input type="date" id="FechaFin" name="FechaFin" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generar Reporte</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h2>Resultados</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var compra in Model)
+            {
+                <tr>
+                    <td>@compra.Id</td>
+                    <td>@compra.ArticuloId</td>
+                    <td>@compra.Cantidad</td>
+                    <td>@compra.Fecha.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form asp-action="ExportarExcel" method="post">
+        <input type="hidden" name="FechaInicio" value="@ViewBag.FechaInicio" />
+        <input type="hidden" name="FechaFin" value="@ViewBag.FechaFin" />
+        <button type="submit" class="btn btn-success">Exportar a Excel</button>
+    </form>
+}

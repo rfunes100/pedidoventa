@@ -1,0 +1,73 @@
+﻿
+
+
+@model List<ExpedienteModel>
+
+
+
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Lista Expediente Paciente
+    </div>
+    <div class="card-body">
+         <a asp-action="Guardar" asp-controller="Expediente" class="btn btn-success"
+           asp-route-id="@ViewBag.Id">
+            <i class="bi bi-plus-circle"></i>
+            Crear nuevo</a> 
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Informacion</th>
+         
+                
+                    <th></th>
+
+                </tr>
+              
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                       
+            
+                        <td>
+
+
+                            <a asp-action="Eliminar" asp-controller="EspecialidadDoctor" class="btn btn-danger" asp-route-id="@item.id">
+                                <i class="bi bi-x-circle-fill"></i> Eliminar
+                            </a>
+                            <a asp-action="ListaDoctor" asp-controller="ProcedimientosMedicos" class="btn btn-info" asp-route-id="@item.id">
+                                <i class="bi bi-journal-medical"></i> Procedimientos
+                            </a>
+
+                        </td>
+                    </tr>
+                    
+                }
+            </tbody>
+
+        </table>
+ 
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,59 @@
+﻿@model EnfermedadesModel
+
+
+
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Editar Enfermedad
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Editar" asp-controller="Enfermedades" method="post">
+
+            <input asp-for="Id" type="hidden" class="form-control" id="exampleInputEmail1">
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">DescripcionGrupo</label>
+                <input asp-for="DescripcionGrupo" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="DescripcionGrupo" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Descripcion</label>
+                <textarea asp-for="DescripcionLarga" id="DescripcionLarga" class="form-control" rows="3" cols="30"> </textarea>
+                <span asp-validation-for="DescripcionLarga" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">clasificacion</label>
+                <select asp-for="clasificacionId" class="form-control" asp-items="ViewBag.Categories">
+                    <option>--Seleccione Clasificacion</option>
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Editar
+            </button>
+            <a asp-action="Listar" asp-controller="Enfermedades" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+         
+        </form>
+
+
+    </div>
+</div>
+
+

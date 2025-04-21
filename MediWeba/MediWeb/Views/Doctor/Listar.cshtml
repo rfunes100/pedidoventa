@@ -1,0 +1,68 @@
+﻿@model List<DoctorModel>
+
+
+
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        Lista Doctores
+    </div>
+    <div class="card-body">
+        <a asp-action="Guardar" asp-controller="Doctor" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i>
+            Crear nuevo
+        </a>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono Trabajo</th>
+                    <th>Correo</th>
+                    
+
+                    <th></th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Apellido</td>
+                        <td>@item.TelefonoTrabajo</td>
+                        <td>@item.Correo</td>
+                        <td>
+                            <a asp-action="Editar" asp-controller="Doctor" class="btn btn-primary" asp-route-idEnfermedad="@item.id">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Mostrar" asp-controller="Doctor" class="btn btn-info" asp-route-idEnfermedad="@item.id">
+                                <i class="bi bi-eye-fill"></i> Mostrar
+                            </a>
+                            <a asp-action="Eliminar" asp-controller="Doctor" class="btn btn-danger" asp-route-idEnfermedad="@item.id">
+                                <i class="bi bi-x-circle-fill"></i> Eliminar
+                            </a>
+
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>

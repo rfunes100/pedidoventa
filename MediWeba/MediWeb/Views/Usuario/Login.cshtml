@@ -1,0 +1,66 @@
+﻿@model UsuarioModel
+
+
+@{
+    Layout = null;
+    var message = TempData["Error"] as string;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+ 
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - MediWeb</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/MediWeb.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+   
+    <title>Login</title>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: white;">
+
+        <div class="bg-success p-5 rounded">
+            <h1 class="display-4 text-white">Bienvenido al sistema de enfermería</h1>
+            @if (!string.IsNullOrEmpty(message))
+            {
+            <div class="alert alert-danger">
+                @message
+            </div>
+            }
+
+            <form class="col-6" asp-action="Login" asp-controller="Usuario" method="post">
+        <div class="mb-3">
+
+                    <label for="exampleInputEmail1" class="form-label text-white ">
+                        <i class="bi bi-person"></i>  Correo Electronico o Usuario
+                    </label>
+                    <input type="text" class="form-control" id="Userid" aria-describedby="emailHelp" asp-for="Userid" value="yosor">
+                    <div id="emailHelp" class="form-text text-white ">No compartas tu correo electronico.</div>
+        </div>
+        <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label text-white">
+                        <i class="bi bi-lock"></i>  Password
+                    </label>
+                    <input type="password" class="form-control" id="Clave" asp-for="Clave" value="123456">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+                <button type="submit" class="btn btn-primary text-white form-control">Submit</button>
+    </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

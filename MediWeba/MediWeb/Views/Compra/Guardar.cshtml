@@ -1,0 +1,48 @@
+﻿@model CompraModel
+
+<h1>Registrar Compra</h1>
+
+<form asp-action="Guardar" method="post">
+    <div class="form-group">
+        <label for="Filtro">Buscar artículo</label>
+        <input type="text" id="Filtro" class="form-control" placeholder="Escriba para buscar" onkeyup="filtrarArticulos()" />
+    </div>
+
+    <div class="form-group">
+        <label for="ArticuloId">Artículo</label>
+        <select id="ArticuloId" name="ArticuloId" class="form-control">
+            <option value="">Seleccione un artículo</option>
+            @foreach (var item in ViewBag.Categorias as IEnumerable<SelectListItem>)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Cantidad">Cantidad</label>
+        <input type="number" id="Cantidad" name="Cantidad" class="form-control" placeholder="Ingrese la cantidad" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-floppy-fill"></i> Registrar Compra
+    </button>
+
+</form>
+
+<script>
+    function filtrarArticulos() {
+        const filtro = document.getElementById("Filtro").value.toLowerCase();
+        const select = document.getElementById("ArticuloId");
+        const opciones = select.options;
+
+        for (let i = 1; i < opciones.length; i++) { // Empieza en 1 para evitar el "Seleccione un artículo"
+            const texto = opciones[i].textContent.toLowerCase();
+            if (texto.includes(filtro)) {
+                opciones[i].style.display = ""; // Mostrar opción
+            } else {
+                opciones[i].style.display = "none"; // Ocultar opción
+            }
+        }
+    }
+</script>

@@ -1,0 +1,127 @@
+﻿@model PacienteModel
+
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Cliente
+    </div>
+    <div class="card-body">
+
+        Expediente
+
+        <form asp-action="Guardar" asp-controller="Paciente" method="post">
+
+
+                       <div class="mb-3">
+                
+                <input asp-for="ExpedienteId" type="hidden" class="form-control" id="exampleInputEmail1" value="@ViewBag.Expediente">
+                 
+            </div>
+
+          
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                <input asp-for="Nombre" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+              
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                <input asp-for="Apellido" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                <input asp-for="Telefono" type="tel" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+           
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">DNI</label>
+                <input asp-for="DNI" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="DNI" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Correo</label>
+                <input asp-for="Correo" type="email" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Correo" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Direccion</label>
+                <textarea asp-for="Direccion" id="Direccion" class="form-control" rows="3" cols="30"> </textarea>
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Fecha Nacimiento</label>
+                <input asp-for="FechaNacimiento" type="date" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Peso (LB)</label>
+                <input asp-for="Peso" type="number" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Peso" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Altura (cm)</label>
+                <input asp-for="altura" type="number" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="altura" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Genero</label>
+                <select asp-for="Sexo" class="form-control" asp-items="ViewBag.Generos">
+                    <option>--Seleccione Genero</option>
+                </select>
+
+            </div>
+
+  @*           <div class="mb-3">
+                <a asp-action="Guardar" asp-controller="Expediente" class="btn btn-link"
+                   >
+                    <i class="bi bi-receipt"></i> Agregar Expediente
+                </a>
+
+            </div>
+ *@
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill" as></i> Guardar
+            </button>
+            <a asp-action="Listar" asp-controller="Paciente" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,56 @@
+﻿
+@model EnfermeraModel
+
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Enfermera
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Guardar" asp-controller="Enfermera" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                <input asp-for="Nombre" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+              
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                <input asp-for="Telefono" type="tel" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+           
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">DNI</label>
+                <input asp-for="DNI" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="DNI" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Direccion</label>
+                <textarea asp-for="Direccion" id="Direccion" class="form-control" rows="3" cols="30"> </textarea>
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            
+            </div>
+
+        
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="Listar" asp-controller="Enfermera" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+

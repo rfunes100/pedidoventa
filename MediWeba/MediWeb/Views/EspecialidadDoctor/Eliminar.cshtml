@@ -1,0 +1,42 @@
+﻿@model EspecialidadDoctorModel
+
+
+
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Eliminar Especialidad Doctor
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Eliminar" asp-controller="EspecialidadDoctor" method="post">
+
+            <input asp-for="id" type="hidden" class="form-control" id="exampleInputEmail1">
+            <input asp-for="idDoctor" type="hidden" class="form-control" id="exampleInputEmail1">
+
+
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+                <div>
+                    Desea Eliminar este: @Html.DisplayTextFor(m => m.id)?
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-floppy-fill"></i> Eliminar
+            </button>
+            <a asp-action="ListaDoctor" asp-controller="EspecialidadDoctor" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>

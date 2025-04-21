@@ -1,0 +1,55 @@
+﻿@model EspecialidadDoctorModel
+
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Especialidad Doctor
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Guardar" asp-controller="EspecialidadDoctor" method="post" asp-route-Id="@ViewBag.Id" >
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">ID</label>
+                <input asp-for="idDoctor" type="hidden" class="form-control" id="exampleInputEmail1" value="@ViewBag.Id">
+                
+                <span asp-validation-for="idDoctor" class="text-danger"></span>
+              
+            </div>
+
+
+             
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">clasificacion</label>
+                <select asp-for="idEspecailidad" class="form-control" asp-items="ViewBag.Especialidades">
+                    <option>--Seleccione Clasificacion</option>
+                </select>
+
+            </div>
+
+
+        
+            <button type="submit" class="btn btn-primary" asp-route-Id="@ViewBag.Id">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="ListaDoctor" asp-controller="EspecialidadDoctor" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+
+
+

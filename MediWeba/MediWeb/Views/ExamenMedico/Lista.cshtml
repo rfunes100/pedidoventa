@@ -1,0 +1,91 @@
+﻿@* @model List<ExamenMedicoModel>
+ *@
+@model VistasPaginacion<ExamenMedicoModel>
+
+
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Lista Examenes
+    </div>
+    <div class="card-body">
+        <a asp-action="Guardar" asp-controller="ExamenMedico" asp-route-id="@ViewBag.ClasificacionExamen" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i>
+            Crear nuevo
+        </a>
+        <br />
+         <form asp-action="Lista" asp-controller="ExamenMedico" method="get">
+             <p>
+                Buscar: <input type="text" name="buscar" class="form-control" id="buscar">
+                 <input type="submit" value="buscar" class="btn  btn-dark">
+                
+
+            </p>
+              
+           
+         </form>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Sinonimo</th>
+                    <th>Muestra Primaria</th>
+                    <th>Muestra alterna</th>
+                    <th>Requerimiento</th>
+                    <th>Dia</th>
+                    <th>Tiempo Entrega</th>
+                    <th>Metodologia</th>
+                    <th></th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+
+                    @foreach (var item in Model.ExamenMedico)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Sinonimo</td>
+                        <td>@item.MuestraPrimaria</td>
+                        <td>@item.MuestraAlterna</td>
+                        <td>@item.Requerimientos?.Descripcion</td>
+                        <td>@item.DiasExamen?.Descripcion</td>
+                        <td>@item.TiemposEntrega?.Descripcion</td>
+                        <td>@item.Metodologias?.Descripcion</td>
+                        <td>
+                            <a asp-action="Editar" asp-controller="ExamenMedico" class="btn btn-primary" asp-route-idEnfermedad="@item.Id" >
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+
+                            <a asp-action="Eliminar" asp-controller="ExamenMedico" class="btn btn-danger" asp-route-idEnfermedad="@item.Id">
+                                <i class="bi bi-x-circle-fill"></i> Eliminar
+                            </a>
+
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+
+            @Html.Partial("~/Views/Paginacion/Paginador.cshtml");
+             
+        </div>
+
+
+    </div>
+</div>
+

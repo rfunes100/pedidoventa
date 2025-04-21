@@ -1,0 +1,91 @@
+﻿@model DoctorModel
+
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Doctor
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Guardar" asp-controller="Doctor" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                <input asp-for="Nombre" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+
+            </div>
+         
+        
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                <input asp-for="Apellido" id="Apellido" class="form-control"/>
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+
+            </div>
+
+     @*         <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Especialidad</label>
+            <select asp-for="especialidadid" class="form-control" asp-items="ViewBag.Categories">
+                    <option>--Seleccione Especialidad</option>
+                </select>
+               
+            </div>  *@
+
+            
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">fecha_Ingreso</label>
+                <input type="date" asp-for="fecha_Ingreso" id="fecha_Ingreso" class="form-control" />
+                <span asp-validation-for="fecha_Ingreso" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                <input asp-for="Telefono" type="tel" id="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">TelefonoTrabajo</label>
+                <input asp-for="TelefonoTrabajo" type="tel" id="TelefonoTrabajo" class="form-control" />
+                <span asp-validation-for="TelefonoTrabajo" class="text-danger"></span>
+
+            </div>
+          
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Correo</label>
+                <input asp-for="Correo" id="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Genero</label>
+                <select asp-for="Sexo" class="form-control" asp-items="ViewBag.Generos">
+                    <option>--Seleccione Genero</option>
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="Listar" asp-controller="Doctor" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+
+    </div>
+</div>
+

@@ -1,0 +1,19 @@
+# Ignorar archivos y carpetas generados automáticamente
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vsidx
+*.exe
+*.dll
+*.pdb
+*.db
+
+
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db

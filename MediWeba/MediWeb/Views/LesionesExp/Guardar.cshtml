@@ -1,0 +1,59 @@
+﻿@model LesionesExpModel
+
+
+
+
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Lesiones
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Guardar" asp-controller="LesionesExp" method="post">
+
+
+            <div class="mb-3">
+
+                <input asp-for="ExpedenteId" type="hidden" class="form-control" id="exampleInputEmail1" value="@ViewBag.Expediente">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Lesion</label>
+                <select asp-for="LesionesId" class="form-control" asp-items="ViewBag.Lesiones">
+                    <option>--Seleccione Lesion</option>
+                </select>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Fecha Lesion</label>
+                <input asp-for="fechaLesion" type="date" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="fechaLesion" class="text-danger"></span>
+
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="Lista" asp-controller="LesionesExp" asp-route-id="@ViewBag.Expediente" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+
+
+

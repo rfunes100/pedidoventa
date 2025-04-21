@@ -1,0 +1,243 @@
+﻿@model  PedidoEncModel
+
+<h1>Crear Factura</h1>
+
+<form id="facturaForm" asp-action="GuardarPedido" method="post">
+    <div class="form-group">
+        <label for="Rtn">RTN</label>
+        <input type="text" id="Rtn" name="Rtn" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="CAI">CAI</label>
+        <input type="text" id="CAI" name="CAI" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="PacienteId">Cliente</label>
+        <select id="PacienteId" name="PacienteId" class="form-control" required>
+            <option value="">Seleccione un Cliente</option>
+            @foreach (var paciente in ViewBag.clientes as IEnumerable<SelectListItem>)
+            {
+                <option value="@paciente.Value">@paciente.Text</option>
+            }
+        </select>
+    </div>
+
+    <h3>Detalles de la Factura</h3>
+    <table class="table" id="detallesTable">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th></th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-success" id="agregarDetalle">
+        <i class="bi bi-plus-circle"></i> Agregar Detalle
+    </button>
+
+    <button type="submit" class="btn btn-primary" id="generarFactura" >
+        <i class="bi bi-printer"></i>  Generar Factura
+    </button>
+    <button type="submit" class="btn btn-primary" id="imprimirFactura">
+        <i class="bi bi-file-earmark-pdf "></i>  Imprimir Factura
+    </button>
+
+    <button type="submit" class="btn btn-warning">
+        <i class="bi bi-file-plus"></i>  Crear Pedido
+    </button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+
+            $("#imprimirFactura").click(function (e) {
+            e.preventDefault(); // Evitar el envío del formulario por defecto
+
+            const form = $("#facturaForm");
+            const formData = form.serialize();
+
+            // Enviar el formulario mediante AJAX
+            $.ajax({
+                url: '/Pedido/ImprimirFactura', // Ruta del nuevo método en el controlador
+                type: "POST",
+                data: formData,
+                xhrFields: {
+                    responseType: 'blob' // Indicar que la respuesta es un archivo
+                },
+                success: function (data, status, xhr) {
+                    // Crear un enlace temporal para descargar el archivo
+                    const blob = new Blob([data], { type: 'application/pdf' });
+                    const link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = xhr.getResponseHeader('Content-Disposition').split('filename=')[1];
+                    link.click();
+
+                    // Mostrar mensaje de éxito
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Éxito!',
+                        text: 'La factura se generó correctamente.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Ocurrió un error al generar la factura.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        });
+
+
+
+
+         $("#generarFactura").click(function (e) {
+            e.preventDefault(); // Evitar el envío del formulario por defecto
+
+            const form = $("#facturaForm");
+            const formData = form.serialize();
+
+            // Enviar el formulario mediante AJAX
+            $.ajax({
+                url: form.attr("action"),
+                type: "POST",
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        // Mostrar mensaje de éxito
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Éxito!',
+                            text: response.message,
+                            confirmButtonText: 'Aceptar'
+                        }).then(() => {
+                            // Limpiar los campos del formulario
+                            form[0].reset();
+                            $("#detallesTable tbody").empty(); // Limpiar los detalles
+                             detalleIndex = 0; // Reiniciar el índice de los detalles
+
+
+                            // Descargar el PDF
+                            const link = document.createElement('a');
+                            link.href = response.pdfUrl;
+                            link.download = response.pdfUrl.split('/').pop();
+                            link.click();
+                        });
+                    } else {
+                     
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Pedido!',
+                            text: response.message,
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                       
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '¡Error!',
+                        text: 'Ocurrió un error al procesar la solicitud.',
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        });
+
+
+
+
+        let detalleIndex = 0;
+
+        $("#agregarDetalle").click(function () {
+            const nuevaFila = `
+                <tr>
+                    <td>
+                        <select name="Detalles[${detalleIndex}].ProductoId" class="form-control producto-select" required>
+                            <option value="">Seleccione</option>
+    @foreach (var producto in ViewBag.Categorias as IEnumerable<SelectListItem>)
+    {
+                                    <option value="@producto.Value">@producto.Text</option>
+    }
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="Detalles[${detalleIndex}].ProductoNombre" class="form-control producto-nombre" readonly />
+                    </td>
+                    <td>
+                        <input type="number" name="Detalles[${detalleIndex}].Precio" class="form-control precio" step="0.01" required readonly />
+                    </td>
+                    <td>
+                        <input type="number" name="Detalles[${detalleIndex}].Cantidad" class="form-control cantidad" required />
+                    </td>
+                    <td>
+                        <input type="number" name="Detalles[${detalleIndex}].Total" class="form-control total" step="0.01" readonly />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger eliminarDetalle">Eliminar</button>
+                    </td>
+                </tr>`;
+            $("#detallesTable tbody").append(nuevaFila);
+            detalleIndex++;
+        });
+
+        $(document).on("click", ".eliminarDetalle", function () {
+            $(this).closest("tr").remove();
+        });
+
+        $(document).on("change", ".producto-select", function () {
+            const fila = $(this).closest("tr");
+            const productoId = $(this).val();
+
+            if (productoId) {
+                $.ajax({
+                    url: '/Pedido/ObtenerPrecioProducto',
+                    type: 'GET',
+                    data: { productoId: productoId },
+                    success: function (data) {
+                        fila.find(".precio").val(data.precio);
+                        fila.find(".producto-nombre").val(data.nombre);
+                        fila.find(".cantidad").trigger("input");
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Error al obtener el precio del producto.'
+                        });
+                    }
+                });
+            } else {
+                fila.find(".precio").val("");
+                fila.find(".producto-nombre").val("");
+                fila.find(".total").val("");
+            }
+        });
+
+        $(document).on("input", ".cantidad, .precio", function () {
+            const fila = $(this).closest("tr");
+            const precio = parseFloat(fila.find(".precio").val()) || 0;
+            const cantidad = parseInt(fila.find(".cantidad").val()) || 0;
+            fila.find(".total").val((precio * cantidad).toFixed(2));
+        });
+    });
+</script>

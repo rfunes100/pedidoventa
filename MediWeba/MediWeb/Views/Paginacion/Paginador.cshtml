@@ -1,0 +1,80 @@
+﻿
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+@* 
+<ul class="pagination">
+    <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Anterior</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+        <a class="page-link" href="#">Siguiente</a>
+    </li>
+</ul>
+ *@
+
+@model PaginacionModelo
+
+@{
+    var cantidadPaginas = (int)Math.Ceiling((double)Model.TOtalRegistros / Model.RegistrosPagina);
+}
+
+<ul class="pagination">
+    @if( Model.PaginaActual == 1 )
+    {
+        <li class="page-item disabled" >@Html.ActionLink("Anterior", null, new{ pagina = 1 },  new { @class = "page-link" })</li>
+    }
+    else
+    {
+        <li class="page-item">@Html.ActionLink("Anterior", null, new{ pagina = Model.PaginaActual - 1 },  new { @class = "page-link" })</li>
+    }
+
+    @if (Model.PaginaActual == cantidadPaginas)
+    {
+        <li class="page-item disabled">@Html.ActionLink("Siguiente", null, new{ pagina = cantidadPaginas },  new { @class = "page-link" })</li>
+    }
+    else
+    {
+        <li class="page-item">@Html.ActionLink("Siguiente", null, new{ pagina = Model.PaginaActual + 1 },  new { @class = "page-link" })</li>
+    }
+</ul>
+
+@* 
+
+@{
+    int inicial = 1;
+    var radio = 3;
+    var cantidadmaximapagina = radio * 2 + 1;
+    int final = (cantidadPaginas > cantidadmaximapagina) ? cantidadmaximapagina : cantidadPaginas;
+    if(Model.PaginaActual > radio +1 )
+    {
+        inicial = Model.PaginaActual - radio;
+        if(cantidadPaginas > Model.PaginaActual+ radio)
+        {
+            final = Model.PaginaActual + radio;
+        }
+        else
+        {
+            final = cantidadPaginas;
+        }
+    }
+}
+
+
+<ul class="pagination">
+
+    <li class="page-item">@Html.ActionLink("Primera", null, new{ pagina =  1 },  new { @class = "page-link" })</li>
+    @for (int i = inicial; i<= final; i++)
+    {
+        if(i == Model.PaginaActual)
+        {
+            <li class="active"> @Html.ActionLink(i.ToString(), null, new{ pagina =  i },   new { @class = "active" })</li>
+        }
+        else
+        {
+            <li> @Html.ActionLink(i.ToString(), null, new{ pagina =  i } ,new { @class = "active" })</li>
+        }
+    }
+    <li class="page-item">@Html.ActionLink("Ultima", null, new{ pagina =  cantidadPaginas },  new { @class = "page-link" })</li>
+</ul> *@

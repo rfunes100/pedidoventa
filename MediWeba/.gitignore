@@ -1,0 +1,22 @@
+# Ignorar archivos y carpetas generados automáticamente
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vsidx
+*.exe
+*.dll
+*.pdb
+*.db
+
+
+# Archivos de configuración local
+appsettings.json
+appsettings.Development.json
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db

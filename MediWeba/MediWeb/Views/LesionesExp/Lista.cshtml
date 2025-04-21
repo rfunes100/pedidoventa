@@ -1,0 +1,69 @@
+﻿@model List<LesionesExpModel>
+
+
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        Lista Lesiones Paciente
+    </div>
+    <div class="card-body">
+        <a asp-action="Guardar" asp-controller="LesionesExp" class="btn btn-success" asp-route-id="@ViewBag.Expediente">
+            <i class="bi bi-plus-circle"></i>
+            Crear nuevo
+        </a>
+
+        <div class="mb-3">
+            <a asp-action="Guardar" asp-controller="Paciente" asp-route-id="@ViewBag.Expediente"  class="btn btn-link">
+                <i class="bi bi-person-heart"></i> Agregar Informacion Paciente
+            </a>
+
+        </div>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Lesion</th>
+                    <th>Fecha Lesion</th>
+                 
+
+                    <th></th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.Lesiones?.Descripcion</td>
+                        <td>@item.fechaLesion</td>
+                       
+                        <td>
+                         
+
+                            <a asp-action="Eliminar" asp-controller="LesionesExp" class="btn btn-danger" asp-route-idEnfermedad="@item.id">
+                                <i class="bi bi-x-circle-fill"></i> Eliminar
+                            </a>
+
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
+</div>
+

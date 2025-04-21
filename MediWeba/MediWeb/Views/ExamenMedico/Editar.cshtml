@@ -1,0 +1,107 @@
+﻿
+@model ExamenMedicoModel
+
+
+
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Editar Examen Medico
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Editar" asp-controller="ExamenMedico" method="post">
+
+            <div class="mb-3">
+
+                <input asp-for="idClasificacionExamen" type="hidden" class="form-control" id="exampleInputEmail1" value="@ViewBag.Expediente">
+                <input asp-for="Id" type="hidden" class="form-control" id="exampleInputEmail1" >
+                <input asp-for="estado" type="hidden" class="form-control" id="exampleInputEmail1">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                <input asp-for="Nombre" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Sinonimo</label>
+                <input asp-for="Sinonimo" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="Sinonimo" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Muestra Primaria</label>
+                <input asp-for="MuestraPrimaria" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="MuestraPrimaria" class="text-danger"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Muestra Alterna</label>
+                <input asp-for="MuestraAlterna" type="text" class="form-control" id="exampleInputEmail1">
+                <span asp-validation-for="MuestraAlterna" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Volumen Minimo</label>
+                <textarea asp-for="VolumenMinimo" id="Direccion" class="form-control" rows="3" cols="30"> </textarea>
+                <span asp-validation-for="VolumenMinimo" class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">requerimiento</label>
+                <select asp-for="requerimientoId" class="form-control" asp-items="ViewBag.requerimientos">
+                    <option>--Seleccione requerimiento</option>
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Dia Examen</label>
+                <select asp-for="DiaExamenId" class="form-control" asp-items="ViewBag.DiaExamenes">
+                    <option>--Seleccione Dia</option>
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Tiempo Entrega</label>
+                <select asp-for="TiempoEntregaId" class="form-control" asp-items="ViewBag.TiemposEntrega">
+                    <option>--Seleccione Tiempo Entrega</option>
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Metodologia</label>
+                <select asp-for="MetodologiaId" class="form-control" asp-items="ViewBag.Metodologias">
+                    <option>--Seleccione Metodologia</option>
+                </select>
+
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-floppy-fill"></i> Guardar
+            </button>
+            <a asp-action="Lista" asp-controller="ExamenMedico" class="btn btn-warning">
+                <i class="bi bi-arrow-left-circle-fill"></i> Volver a la lista
+            </a>
+        </form>
+
+    </div>
+</div>
+
+
+
